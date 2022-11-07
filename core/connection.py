@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from pymongo.database import Database
-from core.var_env import env
+import core.var_env as variables
 
 
 class MongoConnectionProvider:
@@ -45,4 +45,4 @@ class MongoConnectionProvider:
 
 
   def get_database_views(self) -> Database:
-    return self.get_database(env["name_mongoDB"])
+    return self.get_database(variables.env["name_mongoDB"])

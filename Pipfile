@@ -7,6 +7,9 @@ name = "pypi"
 pymongo = "*"
 requests = "*"
 python-dotenv = "*"
+fastapi = "*"
+uvicorn = "*"
+pydantic = "*"
 
 [dev-packages]
 
