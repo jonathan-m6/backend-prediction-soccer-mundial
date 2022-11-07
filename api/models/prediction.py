@@ -1,10 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class prediction(BaseModel):
   _id: str | None = None
-  eventId: str
+  eventId: str = Field(...)
   golesVisita: int
   golesLocal: int
-  useId: str
+  useId: str = Field(...)
   tiemposExtra: bool
   penales: bool
