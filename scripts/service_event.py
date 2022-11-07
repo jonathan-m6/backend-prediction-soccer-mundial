@@ -11,5 +11,5 @@ def get_contract(item):
     contract['golesLocal']=item['intHomeScore']
     contract['golesVisita']=item['intAwayScore']
     contract['estadio'] = item['strVenue']
-    contract['esatdo'] = item['strStatus']
+    contract['estado'] = item['strStatus']
     return contract
