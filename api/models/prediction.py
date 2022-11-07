@@ -5,6 +5,6 @@ class prediction(BaseModel):
   eventId: str = Field(...)
   golesVisita: int
   golesLocal: int
-  useId: str = Field(...)
+  userId: str = Field(...)
   tiemposExtra: bool
   penales: bool
