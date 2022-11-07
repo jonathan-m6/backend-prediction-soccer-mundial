@@ -5,11 +5,11 @@ def get_contract(item):
     contract['nombre']=item['strEvent']
     contract['equipoLocal']=item['strHomeTeam']
     contract['equipoVisita']=item['strAwayTeam']
-    contract['ronda']=item['intRound']
+    contract['ronda']=int(item['intRound'])
     contract['fecha']=item['strTimestamp']
     contract['liga']=item['strLeague']
-    contract['golesLocal']=item['intHomeScore']
-    contract['golesVisita']=item['intAwayScore']
+    contract['golesLocal']=int(item['intHomeScore'])
+    contract['golesVisita']=int(item['intAwayScore'])
     contract['estadio'] = item['strVenue']
     contract['estado'] = item['strStatus']
     return contract
