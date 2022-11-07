@@ -9,6 +9,6 @@ router = APIRouter(
 
 @router.get("")
 async def get_all_events():
-    events=list(mongo_provider.db.games_events.find())
+    events=list(mongo_provider.db.events.find())
     
     return events

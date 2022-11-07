@@ -17,6 +17,6 @@ for item in data["events"]:
     query={'_id':contract['_id']}
     update={'$set':contract}
     list_events.append(contract)
-    mongo_provider.db.games_events2.update_one(query,update,True)
+    mongo_provider.db.events.update_one(query,update,True)
 
-print(list_events)
+print("Eventos cargados")
