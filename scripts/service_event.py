@@ -1,15 +1,15 @@
 
 def get_contract(item):
     contract=dict()
-    contract['idEvent']=item['idEvent']
-    contract['strEvent']=item['strEvent']
-    contract['strHomeTeam']=item['strHomeTeam']
-    contract['strAwayTeam']=item['strAwayTeam']
-    contract['intRound']=item['intRound']
-    contract['strTimestamp']=item['strTimestamp']
-    contract['strBanner']=item['strBanner']
-    contract['strLeague']=item['strLeague']
-    contract['strFilename']=item['strFilename']
-    contract['intHomeScore']=item['intHomeScore']
-    contract['intAwayScore']=item['intAwayScore']
+    contract['_id']=item['idEvent']
+    contract['nombre']=item['strEvent']
+    contract['equipoLocal']=item['strHomeTeam']
+    contract['equipoVisita']=item['strAwayTeam']
+    contract['ronda']=item['intRound']
+    contract['fecha']=item['strTimestamp']
+    contract['liga']=item['strLeague']
+    contract['golesLocal']=item['intHomeScore']
+    contract['golesVisita']=item['intAwayScore']
+    contract['estadio'] = item['strVenue']
+    contract['esatdo'] = item['strStatus']
     return contract
