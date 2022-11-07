@@ -1,11 +1,12 @@
 from service_event import *
 from core.connection import MongoConnectionProvider
 import core.var_env as variables
+import core.var_mongo_provider as mongo_provider
 import requests
 
-MongoConnectionProvider.connect(variables.env["mongo_uri"])
+""" MongoConnectionProvider.connect(variables.env["mongo_uri"])
 
-db=MongoConnectionProvider.get_instance().get_database_views()
+db=MongoConnectionProvider.get_instance().get_database_views() """
 
 
 data=requests.get(variables.env['uri_events']).json()
@@ -13,9 +14,9 @@ data=requests.get(variables.env['uri_events']).json()
 list_events=[]
 for item in data["events"]:
     contract=get_contract(item)
-    query={'idEvent':contract['idEvent']}
+    query={'_id':contract['_id']}
     update={'$set':contract}
-    db.games_events.update_one(query,update,True)
-    db.games_events.update_many()
+    list_events.append(contract)
+    mongo_provider.db.games_events2.update_one(query,update,True)
 
 print(list_events)

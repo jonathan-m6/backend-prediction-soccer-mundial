@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-import core.var_env as variables
+import core.var_mongo_provider as mongo_provider
 
 router = APIRouter(
     prefix="/events",
@@ -9,6 +9,6 @@ router = APIRouter(
 
 @router.get("")
 async def get_all_events():
-    events=list(variables.db.games_events.find())
+    events=list(mongo_provider.db.games_events.find())
     
     return events

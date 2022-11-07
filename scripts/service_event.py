@@ -1,7 +1,7 @@
 
 def get_contract(item):
     contract=dict()
-    contract['idEvent']=item['idEvent']
+    contract['_id']=item['idEvent']
     contract['strEvent']=item['strEvent']
     contract['strHomeTeam']=item['strHomeTeam']
     contract['strAwayTeam']=item['strAwayTeam']
