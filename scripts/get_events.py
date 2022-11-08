@@ -1,6 +1,5 @@
 from service_event import *
-from core.connection import MongoConnectionProvider
-import core.var_env as variables
+from core.var_env import EVENTS_URI
 import core.var_mongo_provider as mongo_provider
 import requests
 
@@ -9,7 +8,7 @@ import requests
 db=MongoConnectionProvider.get_instance().get_database_views() """
 
 
-data=requests.get(variables.env['uri_events']).json()
+data=requests.get(EVENTS_URI).json()
 
 list_events=[]
 for item in data["events"]:

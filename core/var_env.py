@@ -1,5 +1,9 @@
+import os
+from dotenv import load_dotenv
 
-from dotenv import dotenv_values
+load_dotenv('.config\.env')
 
-env=dotenv_values(".config\.env")
+DATABASE = os.getenv('name_mongoDB')
+MONGO_URI = os.getenv('mongo_uri')
+EVENTS_URI = os.getenv('uri_events')
 

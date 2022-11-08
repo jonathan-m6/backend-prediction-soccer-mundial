@@ -21,7 +21,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "api.main:app",
+                "main:app",
                 "--reload",
                 "--port",
                 "8000"

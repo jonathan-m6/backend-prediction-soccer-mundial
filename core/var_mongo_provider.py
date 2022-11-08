@@ -1,5 +1,5 @@
 from core.connection import MongoConnectionProvider
-import core.var_env as variables
+from core.var_env import MONGO_URI
 
-MongoConnectionProvider.connect(variables.env["mongo_uri"])
+MongoConnectionProvider.connect(MONGO_URI)
 db=MongoConnectionProvider.get_instance().get_database_views()
