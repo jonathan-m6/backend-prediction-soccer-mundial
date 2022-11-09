@@ -32,10 +32,10 @@ async def user_put(id_usuario:str, body: dict):
   return user
 
 @router.get("/{id_usuario}/table", status_code=status.HTTP_201_CREATED)
-async def table_get(id_usuario:str, body: dict):
+async def table_get(id_usuario:str):
   user = mongo_provider.db.users.find_one({'_id': id_usuario})
   arrayTable = user['amigos']
   arrayTable.append(user['username'])
 
-  users = mongo_provider.db.users.find({'username': {'$in': arrayTable}}).sort({'total': -1})
-  return users
+  users = mongo_provider.db.users.find({'username': {'$in': arrayTable}}).sort("total",-1)
+  return list(users)

@@ -8,8 +8,8 @@ def get_contract(item):
     contract['ronda']=int(item['intRound'])
     contract['fecha']=item['strTimestamp']
     contract['liga']=item['strLeague']
-    contract['golesLocal']=int(item['intHomeScore'])
-    contract['golesVisita']=int(item['intAwayScore'])
+    contract['golesLocal']=item['intHomeScore'] if not item['intHomeScore'] else int(item['intHomeScore'])
+    contract['golesVisita']=item['intAwayScore'] if not item['intAwayScore'] else int(item['intAwayScore'])
     contract['estadio'] = item['strVenue']
     contract['estado'] = item['strStatus']
     return contract
