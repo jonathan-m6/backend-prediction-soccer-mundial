@@ -9,7 +9,7 @@ router = APIRouter(
   responses={404: {"description": "Not found"}},
 )
 
-@router.post("", status_code=status.HTTP_201_CREATED)
+@router.post("")
 async def user_post(contract: user):
   user=mongo_provider.db.users.find_one({'username':contract.username})
   if not user:
@@ -19,7 +19,7 @@ async def user_post(contract: user):
     raise HTTPException(409,"Usuario ya existe")
   return user
 
-@router.post("/{id_usuario}/amigo", status_code=status.HTTP_201_CREATED)
+@router.put("/{id_usuario}/amigo")
 async def user_put(id_usuario:str, body: dict):
   friend=mongo_provider.db.users.find_one({'username': body['username']})
   if not friend:
@@ -31,7 +31,7 @@ async def user_put(id_usuario:str, body: dict):
   mongo_provider.db.users.update_one({'_id': id_usuario}, {'$set': user})
   return user
 
-@router.get("/{id_usuario}/table", status_code=status.HTTP_201_CREATED)
+@router.get("/{id_usuario}/table")
 async def table_get(id_usuario:str):
   user = mongo_provider.db.users.find_one({'_id': id_usuario})
   arrayTable = user['amigos']
