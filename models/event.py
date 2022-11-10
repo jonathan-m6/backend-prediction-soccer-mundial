@@ -12,3 +12,8 @@ class prediction(BaseModel):
   golesVisita: int
   estadio: str
   estado: str
+  nombreLocal: str
+  nombreVisita: str
+  isoLocal: str
+  isoVisita: str
+  versus: str
