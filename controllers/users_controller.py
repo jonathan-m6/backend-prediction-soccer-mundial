@@ -22,10 +22,13 @@ async def user_post(contract: user):
 @router.put("/{id_usuario}/amigo")
 async def user_put(id_usuario:str, body: dict):
   friend=mongo_provider.db.users.find_one({'username': body['username']})
+  user=mongo_provider.db.users.find_one({'_id': id_usuario})
+  if friend["username"]==user["username"] or friend["username"] in user["amigos"]:
+    raise HTTPException(403,"Usuario no valido")
+
   if not friend:
     raise HTTPException(409,"Usuario no existente")
   
-  user=mongo_provider.db.users.find_one({'_id': id_usuario})
   user['amigos'].append(friend['username'])
 
   mongo_provider.db.users.update_one({'_id': id_usuario}, {'$set': user})
