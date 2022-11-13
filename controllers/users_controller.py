@@ -23,6 +23,8 @@ async def user_post(contract: user):
 async def user_put(id_usuario:str, body: dict):
   friend=mongo_provider.db.users.find_one({'username': body['username']})
   user=mongo_provider.db.users.find_one({'_id': id_usuario})
+  if not 'amigos' in user:
+    user["amigos"]=[]
   if friend["username"]==user["username"] or friend["username"] in user["amigos"]:
     raise HTTPException(403,"Usuario no valido")
 
@@ -37,7 +39,7 @@ async def user_put(id_usuario:str, body: dict):
 @router.get("/{id_usuario}/table")
 async def table_get(id_usuario:str):
   user = mongo_provider.db.users.find_one({'_id': id_usuario})
-  arrayTable = user['amigos']
+  arrayTable = user['amigos'] if 'amigos' in user else []
   arrayTable.append(user['username'])
 
   users = mongo_provider.db.users.find({'username': {'$in': arrayTable}}).sort("total",-1)
