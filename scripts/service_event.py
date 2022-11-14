@@ -1,4 +1,7 @@
 
+from dateutil.parser import parse
+
+
 def get_contract(item):
     contract=dict()
     contract['_id']=item['idEvent']
@@ -7,6 +10,7 @@ def get_contract(item):
     contract['equipoVisita']=item['strAwayTeam']
     contract['ronda']=int(item['intRound'])
     contract['fecha']=item['strTimestamp']
+    contract['fechaOrder']=parse(item['strTimestamp'])
     contract['liga']=item['strLeague']
     contract['golesLocal']=item['intHomeScore'] if not item['intHomeScore'] else int(item['intHomeScore'])
     contract['golesVisita']=item['intAwayScore'] if not item['intAwayScore'] else int(item['intAwayScore'])

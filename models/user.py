@@ -8,4 +8,4 @@ class user(BaseModel):
   puntosMarcador: int = Field(default = 0)
   total: int = Field(default = 0)
   amigos: list = Field(default = [])
-  avatar: str = Field(default=0)
+  avatar: str = Field(default="")
