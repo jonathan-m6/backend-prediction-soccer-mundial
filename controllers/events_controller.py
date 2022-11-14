@@ -9,7 +9,7 @@ router = APIRouter(
 
 @router.get("")
 async def get_all_events(user_id:str):
-    events=list(mongo_provider.db.events.find())
+    events=list(mongo_provider.db.events.find().sort("fechaOrder",1))
     predictions=list(mongo_provider.db.predictions.find({'user_id':user_id}))
     
 
