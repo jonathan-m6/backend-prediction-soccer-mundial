@@ -13,7 +13,7 @@ router = APIRouter(
 async def prediction_post(contract: prediction):
 	prediccion ={**contract.dict(), '_id': shortuuid.uuid()}
 	mongo_provider.db.predictions.insert_one(prediccion)
-	return contract
+	return prediccion
 
 @router.put("/{id_prediction}")
 async def prediction_post(id_prediction:str,contract:prediction):
