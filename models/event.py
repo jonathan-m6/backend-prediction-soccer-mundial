@@ -1,12 +1,14 @@
+from datetime import datetime
 from pydantic import BaseModel
 
-class prediction(BaseModel):
+class event(BaseModel):
   _id: str
   nombre: str
   equipoLocal: str
   equipoVisita: str
   ronda: int
   fecha: str
+  fechaOrder:datetime
   liga: str
   golesLocal: int
   golesVisita: int
