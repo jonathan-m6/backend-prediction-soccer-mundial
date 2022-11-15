@@ -10,8 +10,7 @@ router = APIRouter(
 @router.get("")
 async def get_all_events(user_id:str):
     events=list(mongo_provider.db.events.find().sort("fechaOrder",1))
-    predictions=list(mongo_provider.db.predictions.find({'user_id':user_id}))
-    
+    predictions=list(mongo_provider.db.predictions.find({'userId':user_id}))
 
     for item in predictions:
         get_indexes = [i for i, value in enumerate(events) if value['_id'] == item['eventId']]
