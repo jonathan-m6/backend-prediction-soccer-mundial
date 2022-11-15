@@ -18,4 +18,4 @@ async def prediction_post(contract: prediction):
 @router.put("/{id_prediction}")
 async def prediction_put(id_prediction:str,contract:prediction):
 	mongo_provider.db.predictions.update_one({'_id':id_prediction }, {'$set': contract.dict()})
-	return contract
+	return {**contract.dict(), '_id': id_prediction}
