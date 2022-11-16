@@ -44,3 +44,9 @@ async def table_get(id_usuario:str):
 
   users = mongo_provider.db.users.find({'username': {'$in': arrayTable}}).sort("total",-1)
   return list(users)
+
+
+@router.delete("/{id_usuario}/delete")
+async def user_delete(id_usuario:str):
+  mongo_provider.db.users.delete_one({'_id': id_usuario})
+  return {'message': 'ok'}
