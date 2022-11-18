@@ -15,8 +15,9 @@ async def user_post(contract: user):
   if not user:
     user ={**contract.dict(), '_id': shortuuid.uuid()}
     user['username'] = user['username'].lower()
+    user['email'] = user['email'].lower()
     mongo_provider.db.users.insert_one(user)
-  elif not (user['username'].lower()==contract.username.lower() and user['email']==contract.email):
+  elif not (user['username'].lower()==contract.username.lower() and user['email'].lower()==contract.email.lower()):
     raise HTTPException(409,"Usuario ya existe")
   return user
 
