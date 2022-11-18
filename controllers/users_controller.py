@@ -11,17 +11,18 @@ router = APIRouter(
 
 @router.post("")
 async def user_post(contract: user):
-  user=mongo_provider.db.users.find_one({'username':contract.username})
+  user=mongo_provider.db.users.find_one({'username':contract.username.lower()})
   if not user:
     user ={**contract.dict(), '_id': shortuuid.uuid()}
+    user['username'] = user['username'].lower()
     mongo_provider.db.users.insert_one(user)
-  elif not (user['username']==contract.username and user['email']==contract.email):
+  elif not (user['username'].lower()==contract.username.lower() and user['email']==contract.email):
     raise HTTPException(409,"Usuario ya existe")
   return user
 
 @router.put("/{id_usuario}/amigo")
 async def user_put(id_usuario:str, body: dict):
-  friend=mongo_provider.db.users.find_one({'username': body['username']})
+  friend=mongo_provider.db.users.find_one({'username': body['username'].lower()})
   user=mongo_provider.db.users.find_one({'_id': id_usuario})
   if not 'amigos' in user:
     user["amigos"]=[]
