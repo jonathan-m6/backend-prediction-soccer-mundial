@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.post("")
 async def user_post(contract: user):
-  userNameContract=contract.username.lower().replace(" ","")
+  userNameContract=contract.username.lower().strip().replace(" ","_")
   user=mongo_provider.db.users.find_one({'username':userNameContract})
   if not user:
     user ={**contract.dict(), '_id': shortuuid.uuid()}
@@ -24,7 +24,7 @@ async def user_post(contract: user):
 
 @router.put("/{id_usuario}/amigo")
 async def user_put(id_usuario:str, body: dict):
-  friend=mongo_provider.db.users.find_one({'username': body['username'].lower().replace(" ","")})
+  friend=mongo_provider.db.users.find_one({'username': body['username'].lower().strip().replace(" ","_")})
   user=mongo_provider.db.users.find_one({'_id': id_usuario})
   if not 'amigos' in user:
     user["amigos"]=[]
