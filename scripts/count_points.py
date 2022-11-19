@@ -1,3 +1,5 @@
+from datetime import date, datetime, time
+from dateutil.parser import parse
 import core.var_mongo_provider as mongo_provider
 
 def who_win(local, visita):
@@ -16,7 +18,22 @@ def indexOf(userId, users):
     index = -1
   return index
 
-query = {"_id": {'$in': ['1543883','1543881','1543882','1570148']}}
+def get_date_range():
+  start = date.today()
+  end = date.today()
+
+  min_date_time = datetime.combine(start, time.min)
+  max_date_time = datetime.combine(end, time.max)
+  return min_date_time, max_date_time
+
+
+date_start,date_end=get_date_range()
+query = { 
+  '$and': [
+    {'fechaOrder': {'$gte':  date_start}},
+    {'fechaOrder': {'$lte': date_end}}
+  ]
+}
 list_events = list(mongo_provider.db.events.find(query))
 
 perfects_predictions = list()
