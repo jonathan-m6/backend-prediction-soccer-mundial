@@ -12,6 +12,12 @@ router = APIRouter(
 
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def prediction_post(contract: prediction):
+	prediction_doc=mongo_provider.db.predictions.find_one({"eventId":contract.eventId,"userId":contract.userId})
+	if prediction_doc!=None:
+		prediction_doc["golesLocal"]=contract.golesLocal
+		prediction_doc["golesVisita"]=contract.golesVisita
+		mongo_provider.db.predictions.update_one({'_id':prediction_doc["_id"]},{'$set':prediction_doc})
+		return prediction_doc
 	fecha_hoy=datetime.utcnow()
 	event=mongo_provider.db.events.find_one({'_id':contract.eventId})
 	if fecha_hoy>=event["fechaOrder"]:
