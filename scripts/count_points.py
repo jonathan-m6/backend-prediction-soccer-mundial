@@ -56,10 +56,11 @@ for pp in perfects_predictions:
   index = indexOf(pp["userId"], users)
   if index == -1:
     entity = mongo_provider.db.users.find_one({'_id': pp['userId']})
-    entity["puntosMarcador"] += 1
-    entity["puntosResultado"] += 1
-    entity["total"] += 2
-    users.append(entity)
+    if entity:
+      entity["puntosMarcador"] += 1
+      entity["puntosResultado"] += 1
+      entity["total"] += 2
+      users.append(entity)
   else:
     users[index]["puntosMarcador"] += 1
     users[index]["puntosResultado"] += 1
@@ -69,9 +70,10 @@ for gp in good_predictions:
   index = indexOf(gp["userId"], users)
   if index == -1:
     entity = mongo_provider.db.users.find_one({'_id': gp['userId']})
-    entity["puntosResultado"] += 1
-    entity["total"] += 1
-    users.append(entity)
+    if entity:
+      entity["puntosResultado"] += 1
+      entity["total"] += 1
+      users.append(entity)
   else:
     users[index]["puntosResultado"] += 1
     users[index]["total"] += 1
