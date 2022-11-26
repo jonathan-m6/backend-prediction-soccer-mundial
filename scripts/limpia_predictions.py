@@ -17,4 +17,5 @@ for user in users:
       eventIds.append(prediction['eventId'])
 
 
+
 print(repetidos)
